@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace H4BankVault
@@ -22,7 +23,7 @@ namespace H4BankVault
             do
             {
                 Console.Clear();
-                Console.WriteLine("Menu:\n1. Opret ny bruger\n2.Login\n3. Luk programmet");
+                Console.WriteLine("Menu:\n1. Opret ny bruger\n2. Login\n3. Luk programmet");
                 menuChoice = Console.ReadLine();
                 switch (menuChoice)
                 {
@@ -34,6 +35,7 @@ namespace H4BankVault
                         switch (Console.ReadLine())
                         {
                             case "1":
+                                Console.WriteLine("Skriv note");
                                 note = Console.ReadLine();
                                 break;
                             default:
@@ -51,7 +53,7 @@ namespace H4BankVault
                             Console.Clear();
                             while (myAccount != null)
                             {
-                                Console.WriteLine("Her er dine mulighedder:\n1. Skriv en nu note\n2. Se din note\n3. Se din saldo\n4. Log ud");
+                                Console.WriteLine("Her er dine mulighedder:\n1. Skriv en ny note\n2. Se din note\n3. Se din saldo\n4. Log ud\n5. Slet konto");
                                 switch (Console.ReadLine())
                                 {
                                     case "1":
@@ -67,19 +69,26 @@ namespace H4BankVault
                                     case "4":
                                         myAccount = null;
                                         break;
+                                    case "5":
+                                        service.DeleteAccount(myAccount);
+                                        myAccount = null;
+                                        break;
                                     default:
                                         break;
                                 }
+                                service.SaveAccounts();
                             }
                         }
                         catch (Exception m)
                         {
                             Console.WriteLine(m.Message);
+                            Thread.Sleep(3000);
                         }
                         break;
                     default:
                         break;
                 }
+                service.SaveAccounts();
             } while (menuChoice != "3");
         }
     }

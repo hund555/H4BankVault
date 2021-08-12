@@ -20,8 +20,9 @@ namespace H4BankVault
         {
             using (var aes = new AesCryptoServiceProvider())
             {
-                aes.Mode = CipherMode.CBC;
-                aes.Padding = PaddingMode.PKCS7;
+                //Ikke nødvendige at sætte på da de er på som default
+                //aes.Mode = CipherMode.CBC;
+                //aes.Padding = PaddingMode.PKCS7;
 
                 aes.Key = key;
                 aes.IV = iv;
@@ -43,8 +44,9 @@ namespace H4BankVault
         {
             using (var aes = new AesCryptoServiceProvider())
             {
-                aes.Mode = CipherMode.CBC;
-                aes.Padding = PaddingMode.PKCS7;
+                //Ikke nødvendige at sætte på da de er på som default
+                //aes.Mode = CipherMode.CBC;
+                //aes.Padding = PaddingMode.PKCS7;
 
                 aes.Key = key;
                 aes.IV = iv;

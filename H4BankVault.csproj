@@ -55,6 +55,7 @@
     <Compile Include="Services.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Accounts.json" />
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>

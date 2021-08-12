@@ -9,14 +9,24 @@ namespace H4BankVault
 {
     public class Services
     {
-        const string keyPath = "C:\\Users\\alla1862\\Documents\\";
-        const string jsonPath = "C:\\Users\\alla1862\\source\\repos\\H4BankVault\\Accounts.json";
+        //const string keyPath = "C:\\Users\\alla1862\\Documents\\";
+        //const string jsonPath = "C:\\Users\\alla1862\\source\\repos\\H4BankVault\\Accounts.json";
+        const string keyPath = "C:\\Users\\Kiror_Avaldea\\Documents\\";
+        const string jsonPath = "C:\\Users\\Kiror_Avaldea\\Source\\Repos\\H4BankVault\\Accounts.json";
 
         public List<Account> Accounts { get; set; }
 
         public Services()
         {
-            Accounts = JsonConvert.DeserializeObject<List<Account>>(File.ReadAllText(jsonPath)).OrderBy(a => a.AccountId).ToList();
+            Accounts = new List<Account>();
+            if (File.Exists(jsonPath))
+            {
+                string temp = File.ReadAllText(jsonPath);
+                if (temp != null && temp != "")
+                {
+                    Accounts = JsonConvert.DeserializeObject<List<Account>>(temp).OrderBy(a => a.AccountId).ToList();
+                }
+            }
         }
         
         public Account CreateAccount(string password, string note)
@@ -27,7 +37,14 @@ namespace H4BankVault
 
 
             Account account = new Account();
-            account.AccountId = Accounts.LastOrDefault().AccountId + 1;
+            if (Accounts.Count() >= 1)
+            {
+                account.AccountId = Accounts.LastOrDefault().AccountId + 1;
+            }
+            else
+            {
+                account.AccountId = 1;
+            }
             account.Private_Key_Path = $"{keyPath}PriateKey_{account.AccountId}";
             account.Public_Key_Path = $"{keyPath}PublicKey_{account.AccountId}";
             rsa.AssignNewKey(account.Public_Key_Path, account.Private_Key_Path);
@@ -92,6 +109,13 @@ namespace H4BankVault
             aeskey = rsa.DecryptData(account.Private_Key_Path, aeskey);
             iV = rsa.DecryptData(account.Private_Key_Path, iV);
             return Encoding.UTF8.GetString(aes.Decrypt(Convert.FromBase64String(account.Note), aeskey, iV));
+        }
+
+        public void DeleteAccount(Account account)
+        {
+            File.Delete(account.Private_Key_Path);
+            File.Delete(account.Public_Key_Path);
+            Accounts.Remove(account);
         }
     }
 }
