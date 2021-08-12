@@ -12,3 +12,27 @@ Man kan vælge forskellige scenarier, som f.eks.:
 - Man kan også lægge vægten på Signing af emails og demonstrere en løsning der både signer og krypterer mails i f.eks. Outlook.
 - Der er også mulighed for selv at formulere et oplæg inden for rammerne af faget.
 
+## Krav
+
+#### Data som skal gemmes
+
+- [ ] Konto ID
+- [ ] Hash
+- [ ] Salt
+- [ ] Private key
+- [ ] Public key
+- [ ] AES key
+- [ ] IV
+- [ ] Konto beløb (Krypteret)
+
+#### Funktioner
+
+- [ ] Hashing af kode med salt
+- [ ] Login
+- [ ] Oprettelse af bruger
+- [ ] Kryptering
+- [ ] Dekryptering
+
+#### Ekstra
+
+- [ ] Ændring af kode med nu salt
