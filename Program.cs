@@ -42,6 +42,7 @@ namespace H4BankVault
                                 break;
                         }
                         Console.WriteLine($"Dit nye konto nummer er:" + service.CreateAccount(password, note).AccountId);
+                        Thread.Sleep(3000);
                         break;
                     case "2":
                         try

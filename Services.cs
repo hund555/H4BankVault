@@ -9,10 +9,10 @@ namespace H4BankVault
 {
     public class Services
     {
-        //const string keyPath = "C:\\Users\\alla1862\\Documents\\";
-        //const string jsonPath = "C:\\Users\\alla1862\\source\\repos\\H4BankVault\\Accounts.json";
-        const string keyPath = "C:\\Users\\Kiror_Avaldea\\Documents\\";
-        const string jsonPath = "C:\\Users\\Kiror_Avaldea\\Source\\Repos\\H4BankVault\\Accounts.json";
+        const string keyPath = "C:\\Users\\alla1862\\Documents\\";
+        const string jsonPath = "C:\\Users\\alla1862\\source\\repos\\H4BankVault\\Accounts.json";
+        //const string keyPath = "C:\\Users\\Kiror_Avaldea\\Documents\\";
+        //const string jsonPath = "C:\\Users\\Kiror_Avaldea\\Source\\Repos\\H4BankVault\\Accounts.json";
 
         public List<Account> Accounts { get; set; }
 
@@ -28,7 +28,7 @@ namespace H4BankVault
                 }
             }
         }
-        
+
         public Account CreateAccount(string password, string note)
         {
             AesEncryption aes = new AesEncryption();
@@ -61,7 +61,7 @@ namespace H4BankVault
 
         public void SaveAccounts()
         {
-            string json = JsonConvert.SerializeObject(Accounts);
+            string json = JsonConvert.SerializeObject(Accounts, Formatting.Indented);
             if (File.Exists(jsonPath))
             {
                 File.WriteAllText(jsonPath, json);
@@ -97,7 +97,7 @@ namespace H4BankVault
             account.AES_Key = Convert.ToBase64String(rsa.EncryptData(account.Public_Key_Path, aES_Key_temp));
             account.IV = Convert.ToBase64String(rsa.EncryptData(account.Public_Key_Path, iV));
             account.Note = Convert.ToBase64String(aes.Encrypt(Encoding.UTF8.GetBytes(note), aES_Key_temp, iV));
-            
+
             return account;
         }
 

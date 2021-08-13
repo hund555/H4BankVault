@@ -19,11 +19,11 @@ Man kan vælge forskellige scenarier, som f.eks.:
 - [x] Konto ID
 - [x] Hash
 - [x] Salt
-- [x] Private key
-- [x] Public key
-- [x] AES key
-- [x] IV
-- [x] Konto note (Krypteret)
+- [x] RSA Private key (gemt som xml)
+- [x] RSA Public key (gemt som xml)
+- [x] AES key (Krypteret med RSA)
+- [x] IV (Krypteret med RSA)
+- [x] Konto note (Krypteret med Aes)
 - [x] Konto beløb
 
 #### Funktioner
@@ -165,3 +165,5 @@ Man kan vælge forskellige scenarier, som f.eks.:
 #### Ekstra
 
 - [ ] Ændring af kode med ny salt
+- [ ] Signing
+- [ ] Certificat
